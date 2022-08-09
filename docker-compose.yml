@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+   a:
+     build: ./A
+     container_name: UDP_A
+   b:
+     build: ./B
+     container_name: UDP_B
