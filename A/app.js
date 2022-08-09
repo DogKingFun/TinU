@@ -8,15 +8,9 @@ const HOST_B = 'b';
 
 const socket = dgram.createSocket('udp4');
 
-socket.on('listening', () => {
-    const address = socket.address();
-    console.log('UDP socket listening on ' + address.address + ":" + address.port);
-});
-
-socket.on('message', (message, remote) => {
-    console.log(remote.address + ':' + remote.port +' - ' + message);
-
-    socket.send(message, 0, message.length, PORT_B, HOST_B, (err, bytes) => {
+socket.on('message', (buf, rinfo) => {
+    console.log(rinfo.address + ':' + rinfo.port +' - ' + buf);
+    socket.send(buf, 0, buf.length, PORT_B, HOST_B, (err, bytes) => {
         if (err) throw err;
     });
 });
